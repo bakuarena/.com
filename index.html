@@ -15,38 +15,56 @@
 
 body {
     height: 100vh;
-    background: linear-gradient(270deg, #000, #ff0000, #000);
-    background-size: 400% 400%;
-    animation: bgMove 8s ease infinite;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    overflow: hidden;
     color: white;
 }
 
-@keyframes bgMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* VIDEO BACKGROUND */
+.bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+/* DARK OVERLAY */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: -1;
+}
+
+/* MAIN BOX */
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .box {
     text-align: center;
-    padding: 50px;
+    padding: 45px;
     border-radius: 18px;
     background: rgba(0,0,0,0.65);
     border: 2px solid red;
     box-shadow: 0 0 25px red;
+    max-width: 780px;
 }
 
-/* TEXT ANIMATION */
+/* TITLE */
 .typing {
-    font-size: 42px;
+    font-size: 40px;
     font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
     border-right: 3px solid red;
     width: 0;
+    margin: auto;
     animation: typing 3.5s steps(30, end) forwards,
                blink 0.7s infinite;
     text-shadow: 0 0 10px red;
@@ -61,11 +79,19 @@ body {
     50% { border-color: transparent; }
 }
 
-/* BUTTON */
+/* DESCRIPTION */
+.desc {
+    margin-top: 18px;
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+/* MAIN BUTTON */
 .btn {
-    margin-top: 35px;
+    margin-top: 25px;
     padding: 14px 40px;
-    font-size: 18px;
+    font-size: 17px;
     color: white;
     border: none;
     border-radius: 30px;
@@ -86,19 +112,74 @@ body {
     box-shadow: 0 0 20px red;
     transform: scale(1.05);
 }
+
+/* SOCIAL BUTTONS */
+.socials {
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.social-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1.5px solid red;
+    background: black;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.social-btn:hover {
+    background: red;
+    box-shadow: 0 0 15px red;
+    transform: scale(1.1);
+}
 </style>
 </head>
 
 <body>
 
-<div class="box">
-    <div class="typing">Welcome to the Baku Arena</div>
+<!-- NIGHT BACKGROUND VIDEO -->
+<video class="bg-video" autoplay muted loop>
+    <source src="285225_small.mp4" type="video/mp4">
+</video>
 
-    <button 
-        class="btn"
-        onclick="window.location.href='https://discord.gg/gcwKWRmcyP'">
-        Join Discord
-    </button>
+<div class="overlay"></div>
+
+<div class="container">
+    <div class="box">
+
+        <div class="typing">Welcome to the Baku Arena</div>
+
+        <p class="desc">
+            We are <b>Baku Playz</b>. We sell nukes, stream accounts, and do regular live streams.
+            Click the Join button, join our Discord server, and come to VC where we explain everything properly.
+            Here you’ll get normal games gameplay, chill streams, and full entertainment.
+            Support us, like the stream, and subscribe to the channel!
+        </p>
+
+        <button class="btn"
+            onclick="window.location.href='https://discord.gg/gcwKWRmcyP'">
+            Join Discord
+        </button>
+
+        <div class="socials">
+            <button class="social-btn"
+                onclick="window.location.href='https://youtube.com/@bakuarena?si=Zu7GH-muJpkEGPwV'">
+                YT
+            </button>
+
+            <button class="social-btn"
+                onclick="window.location.href='https://www.instagram.com/_raghav__247'">
+                IG
+            </button>
+        </div>
+
+    </div>
 </div>
 
 </body>
