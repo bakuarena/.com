@@ -22,10 +22,9 @@ body {
 /* BACKGROUND VIDEO */
 .bg-video {
     position: fixed;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     z-index: -2;
 }
@@ -34,11 +33,11 @@ body {
 .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.65);
+    background: rgba(0,0,0,0.65);
     z-index: -1;
 }
 
-/* CENTER */
+/* CENTER BOX */
 .container {
     height: 100vh;
     display: flex;
@@ -46,7 +45,6 @@ body {
     align-items: center;
 }
 
-/* MAIN BOX */
 .box {
     text-align: center;
     padding: 45px;
@@ -57,7 +55,7 @@ body {
     max-width: 800px;
 }
 
-/* WELCOME TEXT */
+/* TITLE */
 .typing {
     font-size: 40px;
     font-weight: bold;
@@ -82,17 +80,13 @@ body {
 
 /* DESCRIPTION */
 .desc {
-    margin-top: 20px;
+    margin-top: 18px;
     font-size: 14px;
     line-height: 1.7;
-    color: white;
-    text-shadow:
-        0 0 6px red,
-        0 0 12px red,
-        0 0 20px red;
+    text-shadow: 0 0 6px red, 0 0 12px red;
 }
 
-/* MAIN BUTTON */
+/* BUTTON */
 .btn {
     margin-top: 25px;
     padding: 14px 40px;
@@ -104,7 +98,6 @@ body {
     background: linear-gradient(270deg, red, black, red);
     background-size: 300% 300%;
     animation: btnMove 4s ease infinite;
-    transition: 0.3s;
 }
 
 @keyframes btnMove {
@@ -113,12 +106,7 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-.btn:hover {
-    box-shadow: 0 0 20px red;
-    transform: scale(1.05);
-}
-
-/* SOCIAL BUTTONS */
+/* SOCIAL */
 .socials {
     margin-top: 22px;
     display: flex;
@@ -133,15 +121,7 @@ body {
     border: 1.5px solid red;
     background: black;
     color: white;
-    font-size: 12px;
     cursor: pointer;
-    transition: 0.3s;
-}
-
-.social-btn:hover {
-    background: red;
-    box-shadow: 0 0 15px red;
-    transform: scale(1.1);
 }
 
 /* MUSIC BUTTON */
@@ -155,8 +135,6 @@ body {
     background: black;
     color: white;
     cursor: pointer;
-    font-size: 14px;
-    box-shadow: 0 0 15px red;
 }
 </style>
 </head>
@@ -164,13 +142,13 @@ body {
 <body>
 
 <!-- BACKGROUND VIDEO -->
-<video class="bg-video" autoplay muted loop>
-    <source src="285225_small.mp4" type="video/mp4">
+<video class="bg-video" autoplay muted loop playsinline>
+    <source src="background.mp4" type="video/mp4">
 </video>
 
-<!-- MUSIC -->
+<!-- MUSIC (SEPARATE FILE) -->
 <audio id="bgMusic" loop>
-    <source src="Luka_Chippi(256k).mp3" type="audio/mpeg">
+    <source src="song.mp3" type="audio/mpeg">
 </audio>
 
 <div class="overlay"></div>
@@ -184,41 +162,33 @@ body {
             We are <b>Baku Playz</b>. We sell nukes, stream accounts, and do regular live streams.
             Click the Join button, join our Discord server, and come to VC where we explain everything properly.
             Here you’ll get normal games gameplay, chill streams, and full entertainment.
-            Support us, like the stream, and subscribe to the channel!
         </p>
 
-        <button class="btn"
-            onclick="window.location.href='https://discord.gg/gcwKWRmcyP'">
+        <button class="btn" onclick="window.location.href='https://discord.gg/gcwKWRmcyP'">
             Join Discord
         </button>
 
         <div class="socials">
-            <button class="social-btn"
-                onclick="window.location.href='https://youtube.com/@bakuarena?si=Zu7GH-muJpkEGPwV'">
-                YT
-            </button>
-
-            <button class="social-btn"
-                onclick="window.location.href='https://www.instagram.com/_raghav__247'">
-                IG
-            </button>
+            <button class="social-btn" onclick="window.location.href='https://youtube.com/@bakuarena'">YT</button>
+            <button class="social-btn" onclick="window.location.href='https://instagram.com/_raghav__247'">IG</button>
         </div>
 
     </div>
 </div>
 
-<!-- MUSIC CONTROL -->
-<button class="music-btn" onclick="toggleMusic()">🔊 Music</button>
+<button class="music-btn" onclick="toggleMusic()">🎵 Music</button>
 
 <script>
 const music = document.getElementById("bgMusic");
 
+/* browser restriction fix */
+document.addEventListener("click", () => {
+    if (music.paused) music.play().catch(()=>{});
+}, { once: true });
+
 function toggleMusic() {
-    if (music.paused) {
-        music.play();
-    } else {
-        music.pause();
-    }
+    if (music.paused) music.play();
+    else music.pause();
 }
 </script>
 
