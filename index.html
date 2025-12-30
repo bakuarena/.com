@@ -7,51 +7,51 @@
 <style>
 * {margin:0; padding:0; box-sizing:border-box; font-family: Arial,sans-serif;}
 body {
-    height:100vh; overflow:hidden; color:white;
-    background:url("background.jpg") no-repeat center center/cover;
-    animation: zoomBG 60s infinite alternate;
-    position:relative;
+    height:100vh; overflow:hidden; color:white; position:relative;
 }
-@keyframes zoomBG {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.1); }
+
+/* VIDEO BACKGROUND */
+.bg-video {
+    position: fixed; inset:0; width:100%; height:100%;
+    object-fit: cover; z-index:-2;
 }
+
+/* DARK OVERLAY */
 .overlay {
     position: fixed; inset:0;
     background: rgba(0,0,0,0.6);
     z-index:-1;
 }
+
+/* CENTER BOX */
 .container {
     height:100vh; display:flex; justify-content:center; align-items:center;
 }
 .box {
-    text-align:center;
-    padding:45px;
-    border-radius:18px;
-    background: rgba(0,0,0,0.65);
-    border:2px solid red;
-    box-shadow:0 0 25px red;
-    max-width:800px;
-    position:relative;
-    z-index:2;
+    text-align:center; padding:45px;
+    border-radius:18px; background: rgba(0,0,0,0.65);
+    border:2px solid red; box-shadow:0 0 25px red;
+    max-width:800px; position:relative; z-index:2;
 }
+
+/* WELCOME TEXT */
 .typing {
-    font-size:40px;
-    font-weight:bold;
-    white-space:nowrap;
-    overflow:hidden;
-    border-right:3px solid red;
-    width:0;
-    margin:auto;
+    font-size:40px; font-weight:bold; white-space:nowrap;
+    overflow:hidden; border-right:3px solid red;
+    width:0; margin:auto;
     animation: typing 3.5s steps(30,end) forwards, blink 0.7s infinite;
     text-shadow: 0 0 12px red;
 }
 @keyframes typing { from{width:0} to{width:100%} }
 @keyframes blink {50%{border-color:transparent}}
+
+/* DESCRIPTION */
 .desc {
     margin-top:18px; font-size:14px; line-height:1.7;
     text-shadow:0 0 6px red,0 0 12px red,0 0 20px red;
 }
+
+/* BUTTONS */
 .btn {
     margin-top:25px; padding:14px 40px; font-size:17px; color:white;
     border:none; border-radius:30px; cursor:pointer;
@@ -74,50 +74,38 @@ body {
     background:black; color:white; cursor:pointer; box-shadow:0 0 15px red;
 }
 
-/* Snow Particle */
+/* SNOW PARTICLES */
 .snowflake {
-    position: fixed;
-    top: -10px;
-    color: white;
-    font-size: 10px;
-    user-select: none;
-    z-index:1;
-    opacity:0.8;
+    position: fixed; top:-10px; color:white; font-size:10px;
+    user-select:none; z-index:1; opacity:0.8;
     animation: fall linear infinite;
 }
-@keyframes fall {
-    0% { transform: translateY(0) rotate(0deg);}
-    100% { transform: translateY(110vh) rotate(360deg);}
-}
+@keyframes fall {0%{transform:translateY(0) rotate(0deg);}100%{transform:translateY(110vh) rotate(360deg);}}
 
-/* Music Visualizer */
+/* MUSIC VISUALIZER */
 #visualizer {
-    position: fixed;
-    bottom:0;
-    left:50%;
+    position: fixed; bottom:0; left:50%;
     transform: translateX(-50%);
-    display:flex;
-    gap:2px;
-    z-index:3;
+    display:flex; gap:2px; z-index:3;
 }
 .bar {
-    width:4px;
-    height:20px;
-    background:red;
+    width:4px; height:20px; background:red;
     animation: bounce 0.5s infinite ease-in-out;
 }
-@keyframes bounce {
-    0%,100%{height:10px;}
-    50%{height:60px;}
-}
+@keyframes bounce {0%,100%{height:10px;}50%{height:60px;}}
 </style>
 </head>
 <body>
 
+<!-- BACKGROUND VIDEO -->
+<video class="bg-video" autoplay muted loop playsinline>
+    <source src="background.mp4" type="video/mp4">
+</video>
+
 <!-- OVERLAY -->
 <div class="overlay"></div>
 
-<!-- SNOW -->
+<!-- SNOW PARTICLES -->
 <div id="snow"></div>
 
 <div class="container">
@@ -142,7 +130,7 @@ body {
 </audio>
 <button class="music-btn" onclick="toggleMusic()">🎵 Music</button>
 
-<!-- Music Visualizer -->
+<!-- MUSIC VISUALIZER -->
 <div id="visualizer"></div>
 
 <script>
@@ -154,7 +142,7 @@ function toggleMusic(){if(music.paused) music.play(); else music.pause();}
 // Snow Generator
 const snowContainer = document.getElementById("snow");
 for(let i=0;i<80;i++){
-    let span = document.createElement("span");
+    let span=document.createElement("span");
     span.innerHTML="❄";
     span.className="snowflake";
     span.style.left=Math.random()*100+"vw";
@@ -164,7 +152,7 @@ for(let i=0;i<80;i++){
     snowContainer.appendChild(span);
 }
 
-// Music Visualizer Fake Animation
+// Music Visualizer
 const visualizer = document.getElementById("visualizer");
 for(let i=0;i<50;i++){
     let bar=document.createElement("div");
