@@ -80,7 +80,7 @@ body {
     50% { border-color: transparent; }
 }
 
-/* DESCRIPTION (RED GLOW) */
+/* DESCRIPTION */
 .desc {
     margin-top: 20px;
     font-size: 14px;
@@ -90,7 +90,6 @@ body {
         0 0 6px red,
         0 0 12px red,
         0 0 20px red;
-    opacity: 0.95;
 }
 
 /* MAIN BUTTON */
@@ -144,6 +143,21 @@ body {
     box-shadow: 0 0 15px red;
     transform: scale(1.1);
 }
+
+/* MUSIC BUTTON */
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 18px;
+    border-radius: 50px;
+    border: 2px solid red;
+    background: black;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 0 15px red;
+}
 </style>
 </head>
 
@@ -153,6 +167,11 @@ body {
 <video class="bg-video" autoplay muted loop>
     <source src="285225_small.mp4" type="video/mp4">
 </video>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+    <source src="Luka_Chippi(256k).mp3" type="audio/mpeg">
+</audio>
 
 <div class="overlay"></div>
 
@@ -187,6 +206,21 @@ body {
 
     </div>
 </div>
+
+<!-- MUSIC CONTROL -->
+<button class="music-btn" onclick="toggleMusic()">🔊 Music</button>
+
+<script>
+const music = document.getElementById("bgMusic");
+
+function toggleMusic() {
+    if (music.paused) {
+        music.play();
+    } else {
+        music.pause();
+    }
+}
+</script>
 
 </body>
 </html>
